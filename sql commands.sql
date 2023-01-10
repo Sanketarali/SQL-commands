@@ -1,44 +1,53 @@
-create database ujire;
 show databases;
-use ujire;
-create table employee(personid int, fname varchar(100), lname varchar(100), city varchar(100), salary int);
-desc employee;
+use sanket;
+show tables;
 select * from employee;
-insert into employee values(1,'sanket','arali','gulbarga',60000);
-insert into employee values(2,'prajwal','patil','bidar',70000);
-insert into employee values(3,'vishwanath','patil','bangalore',67000);
+drop database ujire;
 
-select * from employee;
+create database customer;
 
-insert into employee values(4,'putru','bhogundi','shahabad',69000);
-insert into employee values(4,'siddu','meti','ashok nagar',97000);
+use customer;
+create table customer_info(id int, fname varchar(10), lname varchar(10));
 
-select * from employee;
+show tables;
 
-select * from employee where fname='sanket' and lname='arali';
+select * from customer_info; 
 
-select * from employee where fname='putru' or lname='patil';
-select * from employee;
+delete from customer_info where id=5;
+ drop table  customer_info;
 
-select *from employee where personid=4;
-select * from employee;
+create table customer_info(id integer  , fname varchar(10), lname varchar(10) , salary int , primary key(id));
 
-select *from employee order by salary desc;
-select *from employee order by salary;
+insert into customer_info values(1, 'sanket','arali', 60000 );
+insert into customer_info values(2, 'shagun','patil', 90000 );
+insert into customer_info values(3, 'riyaz','sharma', 80000 );
+insert into customer_info values(4, 'naveen','durga', 70000 );
+insert into customer_info values(5, 'chandan','kp', NULL );
 
-select distinct(lname) from employee;
 
-use ujire;
+select * from customer_info where salary is null;
+select * from customer_info where salary is not null;
 
-select now(), curdate(),curtime();
-select * from employee;
+update customer_info set salary =55000 where id=5;
 
-select avg(salary) from employee;
-select max(salary) from employee;
+alter table customer_info add email varchar(35);
 
-select min(salary) from employee;
-select sum(salary) from employee;
+alter table customer_info drop email;
 
-select ucase(fname) from employee;
-select ucase(lname) from employee;
 
+create table student( id int not null, fname varchar(30) not null , lname varchar(30) not null , age int);
+desc student;
+
+
+
+alter table student  modify age int not null;
+
+alter table student add unique (fname);
+desc student;
+
+
+
+
+alter table student add constraint uc_student unique( age , fname);
+alter table student 
+drop index uc_student;
